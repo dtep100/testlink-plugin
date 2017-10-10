@@ -387,6 +387,8 @@ public final class TestLinkHelper {
 		builder.append("</th><th>");
 		builder.append(Messages.ReportSummary_Details_Name());
 		builder.append("</th><th>");
+		builder.append(Messages.ReportSummary_Details_Platform());
+		builder.append("</th><th>");
 		builder.append(Messages.ReportSummary_Details_TestProjectId());
 		builder.append("</th><th>");
 		builder.append(Messages.ReportSummary_Details_ExecutionStatus());
@@ -400,6 +402,7 @@ public final class TestLinkHelper {
         	builder.append("<td>"+tc.getFullExternalId()+"</td>");
         	builder.append("<td>"+tc.getVersion()+"</td>");
         	builder.append("<td>"+tc.getName()+"</td>");
+        	builder.append("<td>"+tc.getPlatform()+"</td>");
         	builder.append("<td>"+tc.getTestProjectId()+"</td>");
     		builder.append("<td>"+TestLinkHelper.getExecutionStatusTextColored( tc.getExecutionStatus() )+"</td>\n");
         	
