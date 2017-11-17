@@ -9,11 +9,11 @@
 
     <inceptionYear>2010</inceptionYear>
 
-	<artifactId>testlink</artifactId>
-	<name>Jenkins TestLink Plugin</name>
-	<version>3.12+Platform2</version>
-	<packaging>hpi</packaging>
-	<description>This plug-in integrates Jenkins to TestLink</description>
+    <artifactId>testlink</artifactId>
+    <name>Jenkins TestLink Plugin</name>
+    <version>3.12+ssluk01</version>
+    <packaging>hpi</packaging>
+    <description>This plug-in integrates Jenkins to TestLink</description>
 
     <url>http://wiki.jenkins-ci.org/display/JENKINS/TestLink+Plugin</url>
 
