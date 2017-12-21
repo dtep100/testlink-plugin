@@ -157,7 +157,9 @@ public class TestCaseWrapper implements Serializable {
 		String[] keyCustomFieldValues = this.getKeyCustomFieldValues(keyCustomFieldName);
 		int numberOfCustomFields = keyCustomFieldValues != null ? keyCustomFieldValues.length : 0;
 		ExecutionStatus status = ExecutionStatus.NOT_RUN;
-		if (customFieldAndStatus.size() > 0 && customFieldAndStatus.size() == numberOfCustomFields) {
+		// // ssluk - we do not use the custom field for the result file name
+		//if (customFieldAndStatus.size() > 0 && customFieldAndStatus.size() == numberOfCustomFields) {
+		if (customFieldAndStatus.size() > 0) {
 			status = ExecutionStatus.PASSED;
 			for (ExecutionStatus reportedStatus : customFieldAndStatus.values()) {
 				if (reportedStatus == ExecutionStatus.FAILED || reportedStatus == ExecutionStatus.BLOCKED) {
