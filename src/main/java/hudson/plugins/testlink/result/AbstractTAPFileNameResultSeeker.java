@@ -128,25 +128,44 @@ public abstract class AbstractTAPFileNameResultSeeker extends ResultSeeker {
                         }
                     });
 
-            for (String key : testSets.keySet()) {
-                for (TestCaseWrapper automatedTestCase : automatedTestCases) {
-                    final String[] commaSeparatedValues = automatedTestCase
-                            .getKeyCustomFieldValues(this.keyCustomField);
-                    for (String value : commaSeparatedValues) {
-                        String tapFileNameWithoutExtension = key;
-                        int leftIndex = 0;
-                        if (!this.isCompareFullPath()) {
-                            int lastIndex = tapFileNameWithoutExtension.lastIndexOf(File.separator);
-                            if (lastIndex > 0)
-                                leftIndex = lastIndex + 1;
-                        }
-                        int extensionIndex = tapFileNameWithoutExtension.lastIndexOf('.');
-                        if (extensionIndex != -1) {
-                            tapFileNameWithoutExtension = tapFileNameWithoutExtension.substring(leftIndex,
-                                    tapFileNameWithoutExtension.lastIndexOf('.'));
-                        }
-                        if (tapFileNameWithoutExtension.equals(value)) {
-                            this.updateTestCase(testSets, key, automatedTestCase, value, build, listener, testlink);
+            for (final String tapFilePath : testSets.keySet())
+            {
+                for (TestCaseWrapper automatedTestCase : automatedTestCases)
+                {
+                    String tapFileNameWithoutExtension = tapFilePath;
+                    int leftIndex = 0;
+                    if (!this.isCompareFullPath())
+                    {
+                        int lastIndex = tapFileNameWithoutExtension.lastIndexOf(File.separator);
+                        if (lastIndex > 0)
+                            leftIndex = lastIndex + 1;
+                    }
+                    int extensionIndex = tapFileNameWithoutExtension.lastIndexOf('.');
+                    if (extensionIndex != -1)
+                    {
+                        tapFileNameWithoutExtension = tapFileNameWithoutExtension.substring(leftIndex,
+                                tapFileNameWithoutExtension.lastIndexOf('.'));
+                    }
+                    final String testCasePlatform = automatedTestCase.getPlatform();
+                    final String testCaseId = Integer.toString(automatedTestCase.getId());
+                    if ( (testCasePlatform != null &&
+                          tapFileNameWithoutExtension.equals(testCaseId+"-"+testCasePlatform)) ||
+                         tapFileNameWithoutExtension.equals(testCaseId) )
+                    {
+                        this.updateTestCase(testSets, tapFilePath, automatedTestCase, testCaseId, build, listener, testlink);
+                    }
+                    else
+                    {
+                        final String[] commaSeparatedKeyCustomFieldValues = automatedTestCase.getKeyCustomFieldValues(this.keyCustomField);
+                        for (String keyCustomFieldValue : commaSeparatedKeyCustomFieldValues)
+                        {
+                            if ( (testCasePlatform != null &&
+                                  tapFileNameWithoutExtension.equals(keyCustomFieldValue+"-"+testCasePlatform)) ||
+                                 tapFileNameWithoutExtension.equals(keyCustomFieldValue) )
+                            {
+                                this.updateTestCase(testSets, tapFilePath, automatedTestCase, keyCustomFieldValue, build, listener, testlink);
+                                break;
+                            }
                         }
                     }
                 }
