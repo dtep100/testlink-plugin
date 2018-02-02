@@ -340,7 +340,7 @@ public final class TestLinkHelper {
 	 */
 	public static String createReportSummary(Report testLinkReport, Report previous) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("<p><b>"+Messages.ReportSummary_Summary_BuildID(escape(testLinkReport.getBuildId()))+"</b></p>");
+		builder.append("<p><b>"+Messages.ReportSummary_Summary_BuildID(testLinkReport.getBuildId())+"</b></p>");
 		builder.append("<p><b>"+Messages.ReportSummary_Summary_BuildName(Util.escape(testLinkReport.getBuildName()))+"</b></p>");
 		builder.append("<p><a href=\"" + TestLinkBuildAction.URL_NAME + "\">");
 		
@@ -400,12 +400,13 @@ public final class TestLinkHelper {
         {
         	builder.append("<tr>\n");
 
-        	builder.append("<td>"+Util.escape(tc.getId())+"</td>");
+        	builder.append("<td>"+tc.getId()+"</td>");
         	builder.append("<td>"+Util.escape(tc.getFullExternalId())+"</td>");
-        	builder.append("<td>"+Util.escape(tc.getVersion())+"</td>");
+        	builder.append("<td>"+tc.getVersion()+"</td>");
         	builder.append("<td>"+Util.escape(tc.getName())+"</td>");
         	builder.append("<td>"+Util.escape(tc.getPlatform())+"</td>");
-        	builder.append("<td>"+Util.escape(tc.getTestProjectId())+"</td>");
+        	builder.append("<td>"+tc.getTestProjectId()+"</td>");
+
     		builder.append("<td>"+TestLinkHelper.getExecutionStatusTextColored( tc.getExecutionStatus() )+"</td>\n");
 
         	builder.append("</tr>\n");
@@ -414,12 +415,6 @@ public final class TestLinkHelper {
         builder.append("</table>");
         return builder.toString();
 	}
-
-	private static String escape(Integer integer) {
-		return integer != null ? Util.escape(integer.toString()) : "null" ;
-	}
-
-	
 
 	/**
 	 * Prints the difference between two int values, showing a plus sign if the 
