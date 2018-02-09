@@ -11,7 +11,7 @@
 
 	<artifactId>testlink</artifactId>
 	<name>Jenkins TestLink Plugin</name>
-	<version>3.13</version>
+	<version>3.13+ssluk02</version>
 	<packaging>hpi</packaging>
 	<description>This plug-in integrates Jenkins to TestLink</description>
 
